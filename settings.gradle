@@ -1,0 +1,2 @@
+rootProject.name='AndroidRealm'
+include ':app'
