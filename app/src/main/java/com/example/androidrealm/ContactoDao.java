@@ -36,6 +36,26 @@ public class ContactoDao {
         ;
     }
 
+    public RealmResults<Contacto> obtenerBusqueda(String busqueda) {
+        RealmQuery<Contacto> query = realm.where(Contacto.class);
+
+        String busquedaLike = "*"+busqueda+"*";
+
+        return query
+            .like("apellido", busquedaLike)
+            .or().like("nombre", busquedaLike)
+            .or().like("apodo", busquedaLike)
+            .or().like("empresa", busquedaLike)
+            .or().like("direccion.calle", busquedaLike)
+            .or().like("direccion.nro", busquedaLike)
+            .or().like("direccion.piso", busquedaLike)
+            .or().like("direccion.depto", busquedaLike)
+            .or().like("telefonos.numero", busquedaLike)
+            // .or().like("emails.string", busquedaLike) UNSUPPORTED
+            .findAll()
+        ;
+    }
+
     public Contacto insertar(
         String apellido,
         String nombre,

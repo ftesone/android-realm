@@ -75,7 +75,10 @@ public class MainActivity extends AppCompatActivity {
             busqueda = terminosBusqueda[(int) Math.round(Math.random() * (terminosBusqueda.length-1))];
         }
 
-        RealmResults<Contacto> contactos = ContactoDao.getInstance(realm).obtenerTodos();
+        RealmResults<Contacto> contactos = busqueda == null
+            ? ContactoDao.getInstance(realm).obtenerTodos()
+            : ContactoDao.getInstance(realm).obtenerBusqueda(busqueda)
+        ;
 
         TextView textView = (TextView) findViewById(R.id.busqueda);
         textView.setText(busqueda != null ? "Término de búsqueda: "+busqueda : null);
