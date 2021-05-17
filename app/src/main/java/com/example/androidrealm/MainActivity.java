@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -83,15 +84,8 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.busqueda);
         textView.setText(busqueda != null ? "Término de búsqueda: "+busqueda : null);
 
-        ContactoListAdapter adapter = new ContactoListAdapter(contactos);
+        ArrayAdapter<Contacto> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, contactos.toArray(new Contacto[]{}));
 
-//        List<Contacto> contactos = busqueda == null ? contactoDao.obtenerTodos() : contactoDao.obtenerPorBusqueda(busqueda);
-//
-//        TextView textView = (TextView) findViewById(R.id.busqueda);
-//        textView.setText(busqueda != null ? "Término de búsqueda: "+busqueda : null);
-//
-//        ArrayAdapter<Contacto> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, contactos);
-//
         ListView listView = (ListView) findViewById(R.id.list);
 
         listView.setAdapter(adapter);
